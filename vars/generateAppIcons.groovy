@@ -6,6 +6,8 @@ def call(String workspaceDir) {
 
   iconSizes.eachWithIndex { size, index ->
     def outputDirectory = "${workspaceDir}/app/src/main/res/${iconDirectories[index]}"
-    sh "mkdir -p ${outputDirectory}"
+    dir(outputDirectory) {
+      // Create the directory
+    }
   }
 }
