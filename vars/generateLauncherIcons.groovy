@@ -6,6 +6,8 @@ def call(String resDirectory, String iconPath) {
   } catch (Exception e) {
     echo "An error occurred while generating icons: ${e.message}"
     currentBuild.result = 'FAILURE'
+  } finally {
+    cleanTempDirectories(resDirectory)
   }
 }
 
@@ -32,4 +34,10 @@ def generateWebP(String inputPath, String size, String outputPath) {
 
 def generateRoundWebP(String inputPath, String size, String outputPath) {
   sh "convert ${inputPath} -resize ${size} -alpha set -background none -vignette 0x0 -filter Lanczos -quality 100 ${outputPath}"
+}
+
+def cleanTempDirectories(String resDirectory) {
+  dir("${resDirectory}") {
+    sh "rm -rf mipmap-*@tmp"
+  }
 }
