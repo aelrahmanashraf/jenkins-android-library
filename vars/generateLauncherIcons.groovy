@@ -17,8 +17,6 @@ def generateIcons(String resDirectory, String iconPath) {
     def outputIconDirectory = "${resDirectory}/${iconDirectories[index]}"
 
     dir(outputIconDirectory) {
-      sh "mkdir -p ${outputIconDirectory}"
-
       def outputIconPath = "${outputIconDirectory}/ic_launcher.webp"
       sh "convert ${iconPath} -resize ${size} -filter Lanczos -quality 90 ${outputIconPath}"
     }
