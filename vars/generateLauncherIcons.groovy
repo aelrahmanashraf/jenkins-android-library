@@ -1,8 +1,5 @@
 #!/usr/bin/env groovy
 
-def ICON_SIZES = ["72x72", "96x96", "128x128", "144x144", "192x192"]
-def ICON_DIRECTORIES = ["mipmap-hdpi", "mipmap-mdpi", "mipmap-xhdpi", "mipmap-xxhdpi", "mipmap-xxxhdpi"]
-
 def call(String resDirectory, String iconPath) {
   try {
     validateInput(resDirectory, iconPath)
@@ -29,8 +26,11 @@ def validateInput(String resDirectory, String iconPath) {
 }
 
 def generateLauncherIcons(String resDirectory, String iconPath) {
-  ICON_SIZES.eachWithIndex { size, index ->
-    def outputIconDirectory = "${resDirectory}/${ICON_DIRECTORIES[index]}"
+  def iconSizes = ["72x72", "96x96", "128x128", "144x144", "192x192"]
+  def iconDirectories = ["mipmap-hdpi", "mipmap-mdpi", "mipmap-xhdpi", "mipmap-xxhdpi", "mipmap-xxxhdpi"]
+
+  iconSizes.eachWithIndex { size, index ->
+    def outputIconDirectory = "${resDirectory}/${iconDirectories[index]}"
 
     dir(outputIconDirectory) {
       generateWebP(iconPath, size, "ic_launcher.webp")
