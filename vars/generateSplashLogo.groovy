@@ -46,14 +46,14 @@ def generateSplashLogo(String resDirectory, String imagePath) {
 }
 
 /**
- * Generates a modified image by resizing the input image to 512x512 pixels and adding a 180x180 pixel padding,
+ * Generates a modified image by resizing the input image to 512x512 pixels and adding a 380x380 pixel padding,
  * ensuring it is suitable for display on the splash screen.
  *
  * @param inputPath The path to the input image.
  * @param outputPath The path where the generated image is saved.
  */
 def generateImageResource(String inputPath, String outputPath) {
-  sh "convert ${inputPath} -resize 512x512 -filter Lanczos -quality 100 -bordercolor transparent -border 180x180 ${outputPath}"
+  sh "convert ${inputPath} -bordercolor transparent -border 380x380 -resize 512x512 -filter Lanczos -quality 100 ${outputPath}"
 }
 
 def handleFailure() {
