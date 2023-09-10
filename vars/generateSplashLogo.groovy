@@ -53,7 +53,7 @@ def generateSplashLogo(String resDirectory, String imagePath) {
  * @param outputPath The path where the generated image is saved.
  */
 def generateImageResource(String inputPath, String outputPath) {
-  sh "convert ${inputPath} -bordercolor transparent -border 180x180 -resize 512x512 -filter Lanczos -quality 100 ${outputPath}"
+  sh "convert ${inputPath} -resize 512x512 -filter Lanczos -quality 100 -bordercolor transparent -border 180x180 ${outputPath}"
 }
 
 def handleFailure() {
