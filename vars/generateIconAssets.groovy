@@ -1,15 +1,15 @@
 #!/usr/bin/env groovy
 
 /**
- * This Groovy script generates app logo and splash screen logo assets for an Android app.
+ * This Groovy script generates app icon and splash screen icon assets for an Android app.
  *
  * @param resDirectory The path to the Android app's resource directory.
- * @param imagePath The path to the input logo image.
+ * @param imagePath The path to the input icon image.
  */
 def call(String resDirectory, String imagePath) {
   try {
     validateInput(resDirectory, imagePath)
-    generateLogoAssets(resDirectory, imagePath)
+    generateIconAssets(resDirectory, imagePath)
   } catch (FileNotFoundException e) {
     echo "Image file not found: ${imagePath}"
     handleFailure()
@@ -23,7 +23,7 @@ def call(String resDirectory, String imagePath) {
  * Validates the input paths.
  *
  * @param resDirectory The path to the Android app's resource directory.
- * @param imagePath The path to the input logo image.
+ * @param imagePath The path to the input icon image.
  * @throws FileNotFoundException if the image file does not exist.
  * @throws IllegalArgumentException if the resource directory is invalid.
  */
@@ -38,27 +38,27 @@ def validateInput(String resDirectory, String imagePath) {
 }
 
 /**
- * Generates app logo and splash screen logo assets.
+ * Generates app icon and splash screen icon assets.
  *
  * @param resDirectory The path to the Android app's resource directory.
- * @param imagePath The path to the input logo image.
+ * @param imagePath The path to the input icon image.
  */
-def generateLogoAssets(String resDirectory, String imagePath) {
+def generateIconAssets(String resDirectory, String imagePath) {
   def outputDirectory = "${resDirectory}/drawable"
 
   dir(outputDirectory) {
-    generateAppLogo(imagePath, "app_logo.png")
-    generateSplashLogo(imagePath, "splash_logo.png")
+    generateAppIcon(imagePath, "app_icon.png")
+    generateSplashIcon(imagePath, "splash_icon.png")
   }
 }
 
 /**
- * Generates the app logo by resizing the input image to 512x512 pixels.
+ * Generates the app icon by resizing the input image to 512x512 pixels.
  *
- * @param inputPath The path to the input logo image.
- * @param outputPath The path where the generated app logo is saved.
+ * @param inputPath The path to the input icon image.
+ * @param outputPath The path where the generated app icon is saved.
  */
-def generateAppLogo(String inputPath, String outputPath) {
+def generateAppIcon(String inputPath, String outputPath) {
   sh "convert ${inputPath} -resize 512x512 -filter Lanczos -quality 100 ${outputPath}"
 }
 
@@ -66,10 +66,10 @@ def generateAppLogo(String inputPath, String outputPath) {
  * Generates a modified image suitable for a splash screen by resizing the input image to 512x512 pixels,
  * adding a 380x380 pixel transparent border.
  *
- * @param inputPath The path to the input logo image.
- * @param outputPath The path where the generated splash screen logo is saved.
+ * @param inputPath The path to the input icon image.
+ * @param outputPath The path where the generated splash screen icon is saved.
  */
-def generateSplashLogo(String inputPath, String outputPath) {
+def generateSplashIcon(String inputPath, String outputPath) {
   sh "convert ${inputPath} -bordercolor transparent -border 380x380 -resize 512x512 -filter Lanczos -quality 100 ${outputPath}"
 }
 
